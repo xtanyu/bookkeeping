@@ -2,12 +2,12 @@
   "name": "miniprogram-ts-less-quickstart",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "",
   "dependencies": {
+    "@vant/weapp": "^1.10.15"
   },
   "devDependencies": {
     "miniprogram-api-typings": "^2.8.3-1"
