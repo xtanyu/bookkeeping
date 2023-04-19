@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-field": "@vant/weapp/field/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index"
+  }
+}

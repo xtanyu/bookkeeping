@@ -1,0 +1,58 @@
+page {
+  background-color: #f2f2f2;
+}
+
+.page-gradient {
+  background: linear-gradient(to bottom, #89c1f5, #f2f2f2);
+  padding-top: 28%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgb(68, 107, 214);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 82%;
+}
+
+.row-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center
+}
+
+
+.image-container {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.5);
+  margin-right: 6%;
+}
+
+.user-card {
+  background-color: rgb(28, 31, 34);
+}
+
+.key-exchange {
+  width: 80px;
+}
+
+.key-exchange-submit {
+  width: 260px;
+}
+
+.money{
+  font-size: 23px;
+  color: rgb(0, 0, 0); 
+  font-weight: bold; 
+}

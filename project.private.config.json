@@ -3,5 +3,19 @@
   "projectname": "bookkeeping",
   "setting": {
     "compileHotReLoad": true
+  },
+  "libVersion": "2.31.0",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "房间",
+          "pathName": "pages/room/room",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
   }
 }

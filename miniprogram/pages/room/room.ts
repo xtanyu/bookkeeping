@@ -1,20 +1,19 @@
-// pages/index/index.ts
-import Notify from '@vant/weapp/notify/notify';
+// pages/room/room.ts
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    headUrl:"https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head1.png",
-    userName:"小熊"
+    showKeyboard:false,
+    showDetails:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    Notify({ type: 'primary', message: '通知内容' ,safeAreaInsetTop:true});
+
   },
 
   /**
@@ -64,17 +63,18 @@ Page({
    */
   onShareAppMessage() {
 
-  }
-  
-  ,
-  setHead(e:Object){
+  },
+
+  getDetails(){
     this.setData({
-      headUrl:e.detail.avatarUrl
+      showDetails:true
     })
   },
-  setName(e:Object){
+  closeDetails(){
+    console.log(1111);
+    
     this.setData({
-      userName:e.detail.value
+      showDetails:false
     })
   }
 })

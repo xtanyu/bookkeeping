@@ -1,23 +1,34 @@
-<!--index.wxml-->
+<view class="page-gradient">
+
+
+<button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="setHead">
+  <div class="avatar-wrapper">
+    <image class="avatar" src="{{headUrl}}" mode="aspectFill"></image>
+    <image class="upload" src="/images/set.png"></image>
+  </div>
+</button>
+
 <view class="container">
-  <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}">
-      <view class="userinfo-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-      <open-data type="userNickName"></open-data>
-    </block>
-    <block wx:elif="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
-    </block>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+  <view class="input-container">
+    <input class="input" placeholder="请输入用户名" type="nickname" value="{{userName}}" bindblur="setName"/>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="icon-container">
+      <image class="icon" src="/images/set.png"></image>
   </view>
 </view>
+
+<van-divider contentPosition="center">建议使用微信头像和昵称</van-divider>
+
+
+<view class="submit-button-container">
+<van-button style="width: 70%;" custom-class="submit-button" round type="primary" color="linear-gradient(to right, #4bb0ff, #6149f6)">创建房间</van-button>
+</view>
+
+</view>
+
+<van-icon class="my-icon" name="bars" size="25px" info="历史"/>
+
+<van-notify id="van-notify" />
+
+
+
