@@ -18,6 +18,8 @@
     "van-popup": "@vant/weapp/popup/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
-    "van-empty": "@vant/weapp/empty/index"
+    "van-empty": "@vant/weapp/empty/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-share-sheet": "@vant/weapp/share-sheet/index"
   }
 }

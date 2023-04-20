@@ -1,10 +1,17 @@
 <view class="page-gradient">
+  <div style="width: 100%;">
+    <van-button plain type="danger" size="small" round icon="/images/exit.png" style="margin-left: 4%;" bind:click="toIndex">
+      结束本局
+    </van-button>
+  </div>
+
+
   <view class="card">
     <view class="row-card">
       <view style="font-size: 18px;color: white;font-weight: bold;width: 81%;">
         我的积分
       </view>
-      <van-icon bindtap="getDetails"  name="bars" size="25px" info="明细" />
+      <van-icon bindtap="getDetails" name="bars" size="25px" info="明细" />
     </view>
 
     <view class="row-card" style="padding-top: 7%;">
@@ -17,7 +24,7 @@
 </view>
 
 <view style="padding-bottom: 5%;">
-  <van-button plain type="info" size="small" round icon="plus" style="margin-left:70%;">邀请好友</van-button>
+  <van-button plain type="info" size="small" round icon="plus" style="margin-left:70%;" bind:click="invite">邀请好友</van-button>
 </view>
 
 <view style="padding-bottom: 8px;">
@@ -31,7 +38,7 @@
       </view>
       <view style="color: rgb(255, 0, 0);font-size: 16px;">
         100分
-        <van-button size="small" round color="linear-gradient(to right, #4bb0ff, #6149f6)">
+        <van-button bind:click="getSowKeyboard" size="small" round color="linear-gradient(to right, #4bb0ff, #6149f6)">
           转账
         </van-button>
       </view>
@@ -59,85 +66,83 @@
 </view>
 
 
-<van-popup bind:click="closeDetails" root-portal="true" lock-scroll="true" round show="{{ showKeyboard }}"position="bottom" custom-style="display: flex;justify-content: center;flex-wrap: wrap;" closeable close-icon="close" >
+<van-popup bind:close="closeSowKeyboard" root-portal="true" round show="{{ showKeyboard }}" position="bottom" custom-style="display: flex;justify-content: center;flex-wrap: wrap;" closeable close-icon="close">
 
   <div style="width: 80%;padding-top: 15%;padding-bottom: 3%;">
-    <van-cell-group>
-      <van-field input-class="money" size="large" readonly center value="{{ 33.3 }}" placeholder="请输入转账金额" error-message="转给小小熊" error-message-align="center" type="digit" input-align="center">
+      <van-field input-class="money" size="large" readonly center value="{{ money }}" placeholder="请输入转账金额" error-message="转给小小熊" error-message-align="center" type="digit" input-align="center">
       </van-field>
-    </van-cell-group>
   </div>
 
   <div style="width: 80%;background-color: rgb(239, 245, 245);display: flex;justify-content: center;flex-wrap: wrap;border-radius: 30rpx;">
     <van-row gutter="10" style="margin-top: 5%;">
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round>
+        <van-button bind:click="keyboardClick" data-key="1"  custom-class="key-exchange" size="normal" round>
           1
         </van-button>
       </van-col>
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round>
+        <van-button bind:click="keyboardClick" data-key="2"  custom-class="key-exchange" size="normal" round>
           2
         </van-button>
       </van-col>
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round>
+        <van-button bind:click="keyboardClick" data-key="3"  custom-class="key-exchange" size="normal" round>
           3
         </van-button>
       </van-col>
     </van-row>
     <van-row gutter="10" style="margin-top: 2%;">
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round>
+        <van-button bind:click="keyboardClick" data-key="4"  custom-class="key-exchange" size="normal" round>
           4
         </van-button>
       </van-col>
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round>
+        <van-button bind:click="keyboardClick" data-key="5"  custom-class="key-exchange" size="normal" round>
           5
         </van-button>
       </van-col>
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round>
+        <van-button bind:click="keyboardClick" data-key="6"  custom-class="key-exchange" size="normal" round>
           6
         </van-button>
       </van-col>
     </van-row>
     <van-row gutter="10" style="margin-top: 2%;">
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round>
+        <van-button bind:click="keyboardClick" data-key="7"  custom-class="key-exchange" size="normal" round>
           7
         </van-button>
       </van-col>
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round>
+        <van-button bind:click="keyboardClick" data-key="8"  custom-class="key-exchange" size="normal" round>
           8
         </van-button>
       </van-col>
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round>
+        <van-button bind:click="keyboardClick" data-key="9"  custom-class="key-exchange" size="normal" round>
           9
         </van-button>
       </van-col>
     </van-row>
     <van-row gutter="10" style="margin-top: 2%;">
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round>
+        <van-button bind:click="keyboardClick" data-key="."  custom-class="key-exchange" size="normal" round>
           .
         </van-button>
       </van-col>
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round>
+        <van-button bind:click="keyboardClick" data-key="0"  custom-class="key-exchange" size="normal" round>
           0
         </van-button>
       </van-col>
       <van-col span="8">
-        <van-button custom-class="key-exchange" size="normal" round icon="/images/delete.png" />
+        <van-button bind:click="keyboardClick" data-key="delete" custom-class="key-exchange" size="normal" round icon="/images/delete.png" />
       </van-col>
     </van-row>
     <van-row style="margin-top: 2%;margin-bottom: 5%;">
       <van-col span="24">
-        <van-button color="linear-gradient(to right, #4bb0ff, #6149f6)" custom-class="key-exchange-submit" size="normal" round>
+        <van-button color="linear-gradient(to right, #4bb0ff, #6149f6)" custom-class="key-exchange-submit" size="normal" round bind:click="submitMoney">
           确认转账
         </van-button>
       </van-col>
@@ -145,7 +150,7 @@
   </div>
 </van-popup>
 
-<van-popup root-portal="true" lock-scroll="true" round show="{{ showDetails }}" position="bottom" custom-style=" display: flex;justify-content: center;flex-wrap:wrap;" closeable close-icon="close">
+<van-popup bind:close="closeDetails" root-portal="true" round show="{{ showDetails }}" position="bottom" custom-style=" display: flex;justify-content: center;flex-wrap:wrap;" closeable close-icon="close">
   <van-empty style="height: 300px;padding-top: 15%;" description="暂无明细记录" wx:if="{{false}}" />
 
   <scroll-view scroll-y="true" style="height: 320px;padding-top: 15%;width: 90%;">
@@ -181,3 +186,14 @@
     </view>
   </scroll-view>
 </van-popup>
+
+<van-toast id="van-toast" />
+
+
+<van-share-sheet
+  show="{{ showShare }}"
+  title="邀请好友"
+  options="{{ options }}"
+  bind:select="onSelect"
+  bind:close="onCloseShare"
+/>

@@ -1,12 +1,20 @@
 // pages/room/room.ts
+import Toast from '@vant/weapp/toast/toast';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    showKeyboard:false,
-    showDetails:false
+    showKeyboard: false,
+    showDetails: false,
+    money: '',
+    showShare: false,
+    options: [
+      { name: '微信', icon: 'wechat', openType: 'share' },
+      { name: '小程序码', icon: '/images/code.png' },
+    ]
   },
 
   /**
@@ -62,19 +70,95 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    return {
+      title: '打牌记账',
+      path: '/pages/index/index',
+      imageUrl: '/images/share.png'
+    }
   },
 
-  getDetails(){
+  getDetails() {
     this.setData({
-      showDetails:true
+      showDetails: true
     })
   },
-  closeDetails(){
-    console.log(1111);
-    
+  getSowKeyboard() {
     this.setData({
-      showDetails:false
+      showKeyboard: true
     })
+  },
+  closeDetails() {
+    this.setData({
+      showDetails: false
+    })
+  },
+  closeSowKeyboard() {
+    this.setData({
+      showKeyboard: false
+    })
+  },
+  keyboardClick(event: Object) {
+    const key = event.currentTarget.dataset.key;
+    let money = this.data.money;
+    if (key == '.') {
+      if (money) {
+        if (money.indexOf('.') == -1) {
+          money = money + '.';
+          this.setData({
+            money: money
+          })
+        }
+      }
+      return;
+    }
+    if (key == 'delete') {
+      if (money) {
+        money = money.slice(0, -1);
+        this.setData({
+          money: money
+        })
+      }
+      return;
+    }
+    if (this.countDecimalPlaces(money) + 1 > 2) {
+      Toast('最多仅支持两位小数');
+      return;
+    }
+    if (parseInt(money, 10) > 100000) {
+      Toast('超出最大限额');
+      return;
+    }
+    money = money + key;
+    this.setData({
+      money: money
+    })
+  },
+  submitMoney() {
+    this.setData({
+      showKeyboard:false,
+      money: ''
+    })
+    Toast('转账成功');
+  },
+  toIndex() {
+    wx.navigateBack()
+  },
+  countDecimalPlaces(num: String) {
+    const match = num.match(/\.(\d+)/);
+    return match ? match[1].length : 0;
+  },
+  invite(){
+    this.setData({
+      showShare:true
+    })
+  },
+  onCloseShare(){
+    this.setData({
+      showShare:false
+    })
+  },
+  onSelect(event:Object) {
+    Toast(event.detail.name);
+    this.onCloseShare();
   }
 })

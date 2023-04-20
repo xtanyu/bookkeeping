@@ -1,20 +1,20 @@
 // pages/index/index.ts
-import Notify from '@vant/weapp/notify/notify';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    headUrl:"https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head1.png",
-    userName:"小熊"
+    headUrl: "https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head1.png",
+    userName: "小熊"
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    Notify({ type: 'primary', message: '通知内容' ,safeAreaInsetTop:true});
+
   },
 
   /**
@@ -65,16 +65,25 @@ Page({
   onShareAppMessage() {
 
   }
-  
+
   ,
-  setHead(e:Object){
+  setHead(e: Object) {
     this.setData({
-      headUrl:e.detail.avatarUrl
+      headUrl: e.detail.avatarUrl
     })
   },
-  setName(e:Object){
+  setName(e: Object) {
     this.setData({
-      userName:e.detail.value
+      userName: e.detail.value
+    })
+  },
+  nicknamereview(e:Object){
+     console.log(e);
+     
+  },
+  putRoom() {
+    wx.navigateTo({
+      url: '/pages/room/room'
     })
   }
 })

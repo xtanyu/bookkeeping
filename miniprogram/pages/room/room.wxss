@@ -3,12 +3,15 @@ page {
 }
 
 .page-gradient {
+
+  background: linear-gradient(to bottom, rgb(218, 101, 101), #e9c1c1);
   background: linear-gradient(to bottom, #89c1f5, #f2f2f2);
-  padding-top: 28%;
-  height: 180px;
+  padding-top: 20%;
+  height: 225px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .card {

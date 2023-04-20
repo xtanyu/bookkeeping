@@ -1,34 +1,27 @@
 <view class="page-gradient">
+  <van-icon class="my-icon" name="bars" size="25px" info="历史" />
+  <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="setHead">
+    <div class="avatar-wrapper">
+      <image class="avatar" src="{{headUrl}}" mode="aspectFill"></image>
+      <image class="upload" src="/images/set.png"></image>
+    </div>
+  </button>
 
-
-<button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="setHead">
-  <div class="avatar-wrapper">
-    <image class="avatar" src="{{headUrl}}" mode="aspectFill"></image>
-    <image class="upload" src="/images/set.png"></image>
-  </div>
-</button>
-
-<view class="container">
-  <view class="input-container">
-    <input class="input" placeholder="请输入用户名" type="nickname" value="{{userName}}" bindblur="setName"/>
-  </view>
-  <view class="icon-container">
+  <view class="container">
+    <view class="input-container">
+      <input class="input" placeholder="请输入用户名" type="nickname" value="{{userName}}" bindblur="setName" bindnicknamereview="nicknamereview" disable-default-padding/>
+    </view>
+    <view class="icon-container">
       <image class="icon" src="/images/set.png"></image>
+    </view>
   </view>
+
+  <van-divider contentPosition="center">建议使用微信头像和昵称</van-divider>
+
+
+  <view class="submit-button-container">
+    <van-button style="width: 70%;" custom-class="submit-button" round type="primary" color="linear-gradient(to right, #4bb0ff, #6149f6)" bind:click="putRoom">创建房间</van-button>
+  </view>
+
 </view>
-
-<van-divider contentPosition="center">建议使用微信头像和昵称</van-divider>
-
-
-<view class="submit-button-container">
-<van-button style="width: 70%;" custom-class="submit-button" round type="primary" color="linear-gradient(to right, #4bb0ff, #6149f6)">创建房间</van-button>
-</view>
-
-</view>
-
-<van-icon class="my-icon" name="bars" size="25px" info="历史"/>
-
-<van-notify id="van-notify" />
-
-
 
