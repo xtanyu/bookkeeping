@@ -1,0 +1,90 @@
+page {
+  background-color: #f2f2f2;
+}
+
+.page-gradient {
+  background: linear-gradient(to bottom, #89c1f5, #f2f2f2);
+  padding-top: 20%;
+  height: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.exit-icon {
+  position: absolute;
+  top: 10%;
+  left: 7%;
+}
+
+.row-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.avatar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  position: relative;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+}
+
+
+.avatar {
+  margin-top: 23%;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.info-font {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 8px;
+  color: rgb(36, 36, 35);
+}
+
+.des-font {
+  color: silver;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.image-container {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.5);
+  margin-right: 6%;
+}
+
+.input-style {
+  border: none; /* 去掉边框 */
+  outline: none; /* 去掉选中时的边框 */
+  background-color: transparent; /* 设置背景色为透明 */
+  text-align: right; /* 文字右对齐 */
+  font-size: 16px; /* 字体大小 */
+}
+
+.round-top{
+  border-top-left-radius: 25px; /* 左上角圆角 */
+  border-top-right-radius: 25px; /* 右上角圆角 */
+}
+
+.round-bottom{
+  border-bottom-left-radius: 25px; /* 左下角直角 */
+  border-bottom-right-radius: 25px; /* 右下角直角 */
+}

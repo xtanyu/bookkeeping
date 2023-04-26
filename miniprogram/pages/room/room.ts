@@ -12,7 +12,7 @@ Page({
     money: '',
     showShare: false,
     options: [
-      { name: '微信', icon: 'wechat', openType: 'share' },
+      { name: '微信', icon: '/images/wx.png', openType: 'share' },
       { name: '小程序码', icon: '/images/code.png' },
     ]
   },
@@ -73,7 +73,7 @@ Page({
     return {
       title: '打牌记账',
       path: '/pages/index/index',
-      imageUrl: '/images/share.png'
+      imageUrl: '/images/share.png',
     }
   },
 
@@ -160,5 +160,10 @@ Page({
   onSelect(event:Object) {
     Toast(event.detail.name);
     this.onCloseShare();
+  },
+  toHistory(){
+    wx.navigateTo({
+      url: '/pages/history/history'
+    })
   }
 })

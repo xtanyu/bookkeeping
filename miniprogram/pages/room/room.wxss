@@ -3,11 +3,9 @@ page {
 }
 
 .page-gradient {
-
-  background: linear-gradient(to bottom, rgb(218, 101, 101), #e9c1c1);
   background: linear-gradient(to bottom, #89c1f5, #f2f2f2);
-  padding-top: 20%;
-  height: 225px;
+  padding-top: 23%;
+  height: 240px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,4 +56,17 @@ page {
   font-size: 23px;
   color: rgb(0, 0, 0); 
   font-weight: bold; 
+}
+
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.exit-icon {
+  position: absolute;
+  top: 7%;
+  left: 7%;
 }

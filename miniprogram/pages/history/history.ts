@@ -1,13 +1,11 @@
-// pages/index/index.ts
-
+// pages/history/history.ts
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    headUrl: "https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head1.png",
-    userName: "小熊"
+
   },
 
   /**
@@ -64,27 +62,8 @@ Page({
    */
   onShareAppMessage() {
 
-  }
-
-  ,
-  setHead(e: Object) {
-    this.setData({
-      headUrl: e.detail.avatarUrl
-    })
   },
-  setName(e: Object) {
-    this.setData({
-      userName: e.detail.value
-    })
-  },
-  putRoom() {
-    wx.navigateTo({
-      url: '/pages/room/room'
-    })
-  },
-  toHistory(){
-    wx.navigateTo({
-      url: '/pages/history/history'
-    })
+  toLast(){
+    wx.navigateBack()
   }
 })

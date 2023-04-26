@@ -1,5 +1,5 @@
 <view class="page-gradient">
-  <van-icon class="my-icon" name="bars" size="25px" info="历史" />
+  <van-icon bindtap="toHistory" class="my-icon" name="bars" size="25px" info="信息" />
   <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="setHead">
     <div class="avatar-wrapper">
       <image class="avatar" src="{{headUrl}}" mode="aspectFill"></image>
@@ -9,7 +9,7 @@
 
   <view class="container">
     <view class="input-container">
-      <input class="input" placeholder="请输入用户名" type="nickname" value="{{userName}}" bindblur="setName" bindnicknamereview="nicknamereview" disable-default-padding/>
+      <input class="input" placeholder="请输入用户名" type="nickname" value="{{userName}}" bindblur="setName" />
     </view>
     <view class="icon-container">
       <image class="icon" src="/images/set.png"></image>
@@ -24,4 +24,3 @@
   </view>
 
 </view>
-

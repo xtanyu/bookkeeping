@@ -10,12 +10,12 @@
   justify-content: center;
   width: 125px;
   height: 125px;
-  /* background-color: transparent; */
-  background-color: #bfdbf5;
+  background-color: transparent;
   border: none;
   outline: none;
   position: relative;
   border-radius: 50%;
+  border: 1px solid #ffffff;
 }
 
 .avatar-wrapper {
@@ -58,6 +58,7 @@
   border-radius: 20px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
   width: 70%;
+  border: 1px solid #ffffff;
 }
 
 .input {

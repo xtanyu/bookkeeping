@@ -4,13 +4,20 @@
   "setting": {
     "compileHotReLoad": false
   },
-  "libVersion": "2.31.0",
+  "libVersion": "2.30.4",
   "condition": {
     "miniprogram": {
       "list": [
         {
           "name": "房间",
           "pathName": "pages/room/room",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "历史信息",
+          "pathName": "pages/history/history",
           "query": "",
           "launchMode": "default",
           "scene": null

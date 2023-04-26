@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/room/room"
+    "pages/room/room",
+    "pages/history/history"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -20,6 +21,9 @@
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-empty": "@vant/weapp/empty/index",
     "van-toast": "@vant/weapp/toast/index",
-    "van-share-sheet": "@vant/weapp/share-sheet/index"
+    "van-share-sheet": "@vant/weapp/share-sheet/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index"
   }
 }
