@@ -1,5 +1,6 @@
 // pages/room/room.ts
 import Toast from '@vant/weapp/toast/toast';
+import Dialog from '@vant/weapp/dialog/dialog';
 
 Page({
 
@@ -13,8 +14,9 @@ Page({
     showShare: false,
     options: [
       { name: '微信', icon: '/images/wx.png', openType: 'share' },
-      { name: '小程序码', icon: '/images/code.png' },
-    ]
+      // { name: '小程序码', icon: '/images/code.png' },
+    ],
+    showCode: false
   },
 
   /**
@@ -135,33 +137,46 @@ Page({
   },
   submitMoney() {
     this.setData({
-      showKeyboard:false,
+      showKeyboard: false,
       money: ''
     })
     Toast('转账成功');
   },
   toIndex() {
-    wx.navigateBack()
+    Dialog.confirm({
+      title: '温馨提示',
+      message: '确定结束本次对局吗,结束后房间内其他用户将无法向你转让积分。'
+    }).then(() => {
+      wx.navigateBack()
+    }) .catch(() => {
+      
+    });
+    
+
   },
   countDecimalPlaces(num: String) {
     const match = num.match(/\.(\d+)/);
     return match ? match[1].length : 0;
   },
-  invite(){
+  invite() {
     this.setData({
-      showShare:true
+      showShare: true
     })
   },
-  onCloseShare(){
+  onCloseShare() {
     this.setData({
-      showShare:false
+      showShare: false
     })
   },
-  onSelect(event:Object) {
-    Toast(event.detail.name);
+  onSelect(event: Object) {
+    if (event.detail.index === 1) {
+      this.setData({
+        showCode: true
+      })
+    }
     this.onCloseShare();
   },
-  toHistory(){
+  toHistory() {
     wx.navigateTo({
       url: '/pages/history/history'
     })

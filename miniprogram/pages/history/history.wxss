@@ -88,3 +88,9 @@ page {
   border-bottom-left-radius: 25px; /* 左下角直角 */
   border-bottom-right-radius: 25px; /* 右下角直角 */
 }
+
+.avatar-list {
+  display: flex;
+  overflow: hidden;
+  justify-content: flex-end; 
+}

@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    showDisclaimer: false,
+    showHistory:false
   },
 
   /**
@@ -63,7 +64,32 @@ Page({
   onShareAppMessage() {
 
   },
-  toLast(){
+  toLast() {
     wx.navigateBack()
+  },
+  showDisclaimer() {
+    this.setData({
+      showDisclaimer: true
+    })
+  },
+  closeDisclaimer() {
+    this.setData({
+      showDisclaimer: false
+    })
+  },
+  copyEmail() {
+    wx.setClipboardData({
+      data: 'admin@xtyu.top'
+    })
+  },
+  showHistory(){
+    this.setData({
+      showHistory:true
+    })
+  },
+  closeHistory(){
+    this.setData({
+      showHistory:false
+    })
   }
 })
