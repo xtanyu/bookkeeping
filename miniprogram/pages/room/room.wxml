@@ -18,7 +18,7 @@
     </view>
 
     <view class="row-card" style="padding-top: 7%;">
-      <view style="font-size: 28px;color: white;font-weight: bold;margin-right: auto;">
+      <view style="font-size: 26px;color: white;font-weight: bold;margin-right: auto;">
         30.1
       </view>
       <van-button style="margin-left: auto;" type="info" round hairline icon="replay" color="linear-gradient(to right, #4bb0ff, #6149f6)" />
@@ -375,3 +375,5 @@
 <van-dialog confirmButtonText="关闭" use-slot title="分享二维码" show="{{ showCode }}">
   <image style="width: 80%;margin: 10% 10%" src="/images/code_test.jpg" />
 </van-dialog>
+
+<van-dialog id="van-dialog" />

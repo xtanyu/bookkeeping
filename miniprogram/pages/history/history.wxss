@@ -80,13 +80,13 @@ page {
 }
 
 .round-top{
-  border-top-left-radius: 25px; /* 左上角圆角 */
-  border-top-right-radius: 25px; /* 右上角圆角 */
+  border-top-left-radius: 18px; /* 左上角圆角 */
+  border-top-right-radius: 18px; /* 右上角圆角 */
 }
 
 .round-bottom{
-  border-bottom-left-radius: 25px; /* 左下角直角 */
-  border-bottom-right-radius: 25px; /* 右下角直角 */
+  border-bottom-left-radius: 18px; /* 左下角直角 */
+  border-bottom-right-radius: 18px; /* 右下角直角 */
 }
 
 .avatar-list {

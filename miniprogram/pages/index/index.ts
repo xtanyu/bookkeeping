@@ -1,4 +1,5 @@
 // pages/index/index.ts
+import { post, upload } from "../../utils/http"
 
 Page({
 
@@ -6,15 +7,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    headUrl: "https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head1.png",
-    userName: "小熊"
+    headUrl: '',
+    userName: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    post("getUserInfo").then((res: any) => {
+      this.setData({
+        headUrl: res.userAvatar,
+        userName: res.userName
+      })
+    });
   },
 
   /**
@@ -66,23 +72,33 @@ Page({
 
   }
 
-  ,
-  setHead(e: Object) {
-    this.setData({
-      headUrl: e.detail.avatarUrl
+  , setHead(e: Object) {
+    upload('setUserAvatar', e.detail.avatarUrl, 'userAvatar').then(() => {
+      this.setData({
+        headUrl: e.detail.avatarUrl
+      })
     })
   },
+
   setName(e: Object) {
-    this.setData({
-      userName: e.detail.value
+    post('setUserName', { userName: e.detail.value }).then(() => {
+      this.setData({
+        userName: e.detail.value
+      })
     })
   },
+
   putRoom() {
-    wx.navigateTo({
-      url: '/pages/room/room'
-    })
+    if(this.data.userName){
+      wx.navigateTo({
+        url: '/pages/room/room'
+      })
+    }else{
+      wx.showToast({ title: '请填写用户名后再创建房间', icon: 'none' ,duration:3000})
+    }
   },
-  toHistory(){
+
+  toHistory() {
     wx.navigateTo({
       url: '/pages/history/history'
     })

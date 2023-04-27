@@ -12,7 +12,7 @@
       <input class="input" placeholder="请输入用户名" type="nickname" value="{{userName}}" bindblur="setName" />
     </view>
     <view class="icon-container">
-      <image class="icon" src="/images/set.png"></image>
+      <image  class="icon" src="/images/set.png"></image>
     </view>
   </view>
 
