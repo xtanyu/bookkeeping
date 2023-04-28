@@ -98,4 +98,5 @@
   position: absolute;
   top: 20%;
   right: 18%;
+  color: linear-gradient(to right, #75a5db, #e07555);
 }

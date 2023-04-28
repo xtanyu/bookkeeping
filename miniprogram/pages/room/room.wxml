@@ -1,10 +1,10 @@
 <view class="page-gradient">
-  <div style="font-size: 17px;">小小熊的房间(0127)</div>
+  <div style="font-size: 17px;">房间({{roomNo}})</div>
 
   <div style="width: 100%;">
-    <image bindtap="toHistory" class="avatar" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head1.png" mode="aspectFill"></image>
+    <image bindtap="toHistory" class="avatar" src="{{myPointInfoVo.userAvatar}}" mode="aspectFill"></image>
     <div style="color: rgb(179, 172, 172);font-size: 13px;">
-      小小熊，祝你玩的开心～
+      {{myPointInfoVo.userName}},祝你玩的开心～
     </div>
   </div>
 
@@ -14,14 +14,13 @@
         我的积分
       </view>
       <van-icon style="margin-left: auto;padding-right: 5%;" bindtap="getDetails" name="bars" size="25px" info="明细" />
-      <!-- <van-button bindtap="getDetails" style="margin-left: auto;" type="info" round hairline icon="bars" color="linear-gradient(to right, #4bb0ff, #6149f6)"/> -->
     </view>
 
     <view class="row-card" style="padding-top: 7%;">
       <view style="font-size: 26px;color: white;font-weight: bold;margin-right: auto;">
-        30.1
+        {{myPointInfoVo.userPoint}}
       </view>
-      <van-button style="margin-left: auto;" type="info" round hairline icon="replay" color="linear-gradient(to right, #4bb0ff, #6149f6)" />
+      <van-button style="margin-left: auto;" type="info" round hairline icon="replay" bind:click="init" color="linear-gradient(to right, #4bb0ff, #6149f6)" />
     </view>
   </view>
 
@@ -36,39 +35,23 @@
   <van-button style="margin-left: auto;margin-right: 5%;" plain type="info" size="small" round icon="plus" bind:click="invite">邀请好友</van-button>
 </view>
 
-<div wx:if="{{false}}" style="display: flex;justify-content: center;color: rgb(189, 189, 189);">暂无其他用户～</div>
+<div wx:if="{{otherPointInfoVoArr.length<1}}" style="display: flex;justify-content: center;color: rgb(189, 189, 189);padding-top: 25%;">暂无其他用户～</div>
 
-<div wx:if="{{true}}">
+<div wx:for="{{otherPointInfoVoArr}}">
   <view style="padding-bottom: 8px;">
     <van-cell-group inset>
       <van-cell center>
         <view slot="title" style="display: flex;align-items: center">
-          <image class="image-container" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
+          <image class="image-container" src="{{item.userAvatar}}" mode="aspectFill"></image>
           <view>
-            <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
+            <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">{{item.userName}}</text>
           </view>
         </view>
-        <view style="color: rgb(255, 0, 0);font-size: 16px;">
-          100分
-          <van-button bind:click="getSowKeyboard" size="small" round color="linear-gradient(to right, #4bb0ff, #6149f6)">
-            转账
-          </van-button>
-        </view>
-      </van-cell>
-    </van-cell-group>
-  </view>
-  <view style="padding-bottom: 8px;">
-    <van-cell-group inset>
-      <van-cell center>
-        <view slot="title" style="display: flex;align-items: center">
-          <image class="image-container" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head3.png" mode="aspectFill"></image>
-          <view>
-            <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小河马</text>
+        <view style="color: rgb(255, 0, 0);font-size: 16px;display: flex;align-items: center;justify-content: flex-end; ">
+          <view style="margin-right: 5px;">
+            {{item.userPoint}}分
           </view>
-        </view>
-        <view style="color: rgb(255, 0, 0);font-size: 16px;">
-          100分
-          <van-button size="small" round color="linear-gradient(to right, #4bb0ff, #6149f6)">
+          <van-button bind:click="getSowKeyboard" size="small" round color="linear-gradient(to right, #4bb0ff, #6149f6)" data-uid="{{item.userId}}" data-name="{{item.userName}}">
             转账
           </van-button>
         </view>
@@ -81,7 +64,7 @@
 <van-popup bind:close="closeSowKeyboard" root-portal="true" round show="{{ showKeyboard }}" position="bottom" custom-style="display: flex;justify-content: center;flex-wrap: wrap;" closeable close-icon="close">
 
   <div style="width: 80%;padding-top: 15%;padding-bottom: 3%;">
-    <van-field input-class="money" size="large" readonly center value="{{ money }}" placeholder="请输入转账金额" error-message="转给小小熊" error-message-align="center" type="digit" input-align="center">
+    <van-field input-class="money" size="large" readonly center value="{{ money }}" placeholder="请输入转账金额" error-message="转给{{payeeUserName}}" error-message-align="center" type="digit" input-align="center">
     </van-field>
   </div>
 

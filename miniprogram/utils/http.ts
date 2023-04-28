@@ -1,5 +1,5 @@
 // 不需要验证的请求,因为不需验证所以需要店铺id来查询对应店铺数据
-const host = "http://192.168.0.107:8080/jeecg-boot/api/bookkeeping/";
+const host = "http://192.168.0.109:8080/jeecg-boot/api/bookkeeping/";
 
 export function get(url: string, data: any = {}): Promise<any> {
   wx.showLoading({ title: '加载中' });

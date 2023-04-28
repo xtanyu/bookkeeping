@@ -1,5 +1,5 @@
 <view class="page-gradient">
-  <van-icon bindtap="toHistory" class="my-icon" name="bars" size="25px" info="信息" />
+  <van-icon bindtap="toHistory" class="my-icon" name="bars" size="25px" info="历史" />
   <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="setHead">
     <div class="avatar-wrapper">
       <image class="avatar" src="{{headUrl}}" mode="aspectFill"></image>
@@ -12,7 +12,7 @@
       <input class="input" placeholder="请输入用户名" type="nickname" value="{{userName}}" bindblur="setName" />
     </view>
     <view class="icon-container">
-      <image  class="icon" src="/images/set.png"></image>
+      <image class="icon" src="/images/set.png"></image>
     </view>
   </view>
 
@@ -20,7 +20,12 @@
 
 
   <view class="submit-button-container">
-    <van-button style="width: 70%;" custom-class="submit-button" round type="primary" color="linear-gradient(to right, #4bb0ff, #6149f6)" bind:click="putRoom">创建房间</van-button>
+    <van-button style="width: 70%;" custom-class="submit-button" round type="primary" color="linear-gradient(to right, #4bb0ff, #6149f6)" bind:click="putRoom">{{usagesRoom?'继续游戏':'创建房间'}}
+    </van-button>
   </view>
+
+  <van-divider wx:if="{{usagesRoom}}" contentPosition="center">如果要创建房间,请先进入原房间结束对局
+  </van-divider>
+
 
 </view>

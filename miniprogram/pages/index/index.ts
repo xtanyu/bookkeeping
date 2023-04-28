@@ -8,18 +8,26 @@ Page({
    */
   data: {
     headUrl: '',
-    userName: ''
+    userName: '',
+    usagesRoom: undefined
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
+  onLoad(param: any) {
     post("getUserInfo").then((res: any) => {
       this.setData({
         headUrl: res.userAvatar,
         userName: res.userName
       })
+      if (param.roomId) {
+        post("joinRoom", { roomId: param.roomId }).then((roomRes: any) => {
+          wx.navigateTo({
+            url: '/pages/room/room?roomId=' + roomRes.id
+          })
+        })
+      }
     });
   },
 
@@ -34,7 +42,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    post("getRoomInfo").then((res: any) => {
+      this.setData({
+        usagesRoom: res
+      })
+    });
   },
 
   /**
@@ -89,18 +101,28 @@ Page({
   },
 
   putRoom() {
-    if(this.data.userName){
-      wx.navigateTo({
-        url: '/pages/room/room'
-      })
-    }else{
-      wx.showToast({ title: '请填写用户名后再创建房间', icon: 'none' ,duration:3000})
+    if (this.data.userName) {
+      var room: any = this.data.usagesRoom;
+      if (room) {
+        wx.navigateTo({
+          url: '/pages/room/room?roomId=' + room.id
+        })
+      } else {
+        post("buildRoom").then((res: any) => {
+          wx.navigateTo({
+            url: '/pages/room/room?roomId=' + res.id
+          })
+        });
+      }
+    } else {
+      wx.showToast({ title: '请填写用户名后再创建房间', icon: 'none', duration: 3000 })
     }
   },
 
   toHistory() {
-    wx.navigateTo({
-      url: '/pages/history/history'
-    })
+    wx.showToast({ title: '开发者正在努力开发中～', icon: 'none', duration: 3000 })
+    // wx.navigateTo({
+    //   url: '/pages/history/history'
+    // })
   }
 })
