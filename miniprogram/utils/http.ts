@@ -1,8 +1,11 @@
 // 不需要验证的请求,因为不需验证所以需要店铺id来查询对应店铺数据
-const host = "http://192.168.0.109:8080/jeecg-boot/api/bookkeeping/";
+// const host = "http://192.168.0.109:8080/jeecg-boot/api/bookkeeping/";
+const host = "https://bookkeeping.xtyu.top/api/bookkeeping/";
+// const host = "http://127.0.0.1:8080/jeecg-boot/api/bookkeeping/";
+
 
 export function get(url: string, data: any = {}): Promise<any> {
-  wx.showLoading({ title: '加载中' });
+  wx.showLoading({ title: '' });
   return new Promise((resolve) => {
     wx.request({
       url: host + url,
@@ -41,7 +44,7 @@ export function get(url: string, data: any = {}): Promise<any> {
 
 
 export function post(url: string, data: any = {}): Promise<any> {
-  wx.showLoading({ title: '加载中' });
+  wx.showLoading({ title: '' });
   return new Promise((resolve) => {
     wx.request({
       url: host + url,

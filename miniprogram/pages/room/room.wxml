@@ -37,7 +37,7 @@
 
 <div wx:if="{{otherPointInfoVoArr.length<1}}" style="display: flex;justify-content: center;color: rgb(189, 189, 189);padding-top: 25%;">暂无其他用户～</div>
 
-<div wx:for="{{otherPointInfoVoArr}}">
+<div wx:for="{{otherPointInfoVoArr}}" wx:key="userId">
   <view style="padding-bottom: 8px;">
     <van-cell-group inset>
       <van-cell center>
@@ -146,202 +146,35 @@
 </van-popup>
 
 <van-popup bind:close="closeDetails" root-portal="true" round show="{{ showDetails }}" position="bottom" custom-style=" display: flex;justify-content: center;flex-wrap:wrap;" closeable close-icon="close">
-  <van-empty style="height: 300px;padding-top: 15%;" description="暂无明细记录" wx:if="{{false}}" />
+  <van-empty wx:if="{{tansferDetails.length<1}}" style="height: 300px;padding-top: 15%;" description="暂无明细记录" wx:if="{{false}}" />
 
   <scroll-view scroll-y="true" style="height: 320px;padding-top: 15%;width: 90%;">
     <view>
-      <van-cell-group>
-        <van-cell center>
+      <van-cell-group wx:for="{{tansferDetails}}" wx:key="detailsId">
+        <van-cell center wx:if="{{item.payeeUserId === myPointInfoVo.userId}}">
           <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(255, 0, 0);font-size: 17px;">+1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
+            <view style="color: rgb(255, 0, 0);font-size: 17px;">+{{item.points}}分</view>
+            <view style="color: rgb(189, 189, 189);">{{item.time}}</view>
           </view>
           <view style="display: flex;align-items: center">
             来自
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
+            <image class="image-container" style="margin: 4px;" src="{{item.payerUserAvatar}}" mode="aspectFill"></image>
             <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
+              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">{{item.payerUserName}}</text>
             </view>
           </view>
         </van-cell>
-        <van-cell center>
+
+        <van-cell center  wx:if="{{item.payerUserId === myPointInfoVo.userId}}">
           <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(60, 255, 0);font-size: 17px;">-1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
+            <view style="color: rgb(60, 255, 0);font-size: 17px;">-{{item.points}}分</view>
+            <view style="color: rgb(189, 189, 189);">{{item.time}}</view>
           </view>
           <view style="display: flex;align-items: center">
             转给
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
+            <image class="image-container" style="margin: 4px;" src="{{item.payeeUserAvatar}}" mode="aspectFill"></image>
             <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(255, 0, 0);font-size: 17px;">+1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            来自
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(60, 255, 0);font-size: 17px;">-1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            转给
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(255, 0, 0);font-size: 17px;">+1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            来自
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(60, 255, 0);font-size: 17px;">-1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            转给
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(255, 0, 0);font-size: 17px;">+1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            来自
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(60, 255, 0);font-size: 17px;">-1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            转给
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(255, 0, 0);font-size: 17px;">+1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            来自
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(60, 255, 0);font-size: 17px;">-1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            转给
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(255, 0, 0);font-size: 17px;">+1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            来自
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(60, 255, 0);font-size: 17px;">-1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            转给
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(255, 0, 0);font-size: 17px;">+1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            来自
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
-            </view>
-          </view>
-        </van-cell>
-        <van-cell center>
-          <view slot="title" style="padding-left: 10px;">
-            <view style="color: rgb(60, 255, 0);font-size: 17px;">-1分</view>
-            <view style="color: rgb(189, 189, 189);">18:56:02</view>
-          </view>
-          <view style="display: flex;align-items: center">
-            转给
-            <image class="image-container" style="margin: 4px;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
-            <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">小小狗</text>
+              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">{{item.payeeUserName}}</text>
             </view>
           </view>
         </van-cell>

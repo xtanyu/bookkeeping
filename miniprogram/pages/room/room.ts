@@ -27,7 +27,8 @@ Page({
     },
     otherPointInfoVoArr: [],
     payeeUserId: undefined,
-    payeeUserName: undefined
+    payeeUserName: undefined,
+    tansferDetails:[]
   },
   init() {
     if (this.data.roomId) {
@@ -97,23 +98,27 @@ Page({
    */
   onShareAppMessage() {
     return {
-      title: '打牌记账',
+      title: '邀请您进入记账房间(' + this.data.roomNo + ')',
       path: '/pages/index/index?roomId=' + this.data.roomId,
       imageUrl: '/images/share.png',
     }
   },
 
   getDetails() {
-    Toast('开发者正在努力开发中～');
-    // this.setData({
-    //   showDetails: true
-    // })
+    post('roomTransferDetails', { roomId: this.data.roomId }).then((res) => {
+      this.setData({
+        showDetails: true,
+        tansferDetails: res
+      })
+    });
+
   },
   getSowKeyboard(e: any) {
     this.setData({
       showKeyboard: true,
       payeeUserId: e.target.dataset.uid,
-      payeeUserName: e.target.dataset.name
+      payeeUserName: e.target.dataset.name,
+      money: ''
     })
   },
   closeDetails() {
@@ -185,7 +190,7 @@ Page({
         wx.navigateBack();
       });
     }).catch(() => {
-      Toast('记账继续～');
+
     });
   },
   countDecimalPlaces(num: String) {
@@ -211,8 +216,9 @@ Page({
     this.onCloseShare();
   },
   toHistory() {
-    wx.navigateTo({
-      url: '/pages/history/history'
-    })
+    Toast('作者正在努力开发中,敬请期待～');
+    // wx.navigateTo({
+    //   url: '/pages/history/history'
+    // })
   }
 })

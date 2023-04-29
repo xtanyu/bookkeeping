@@ -1,5 +1,6 @@
 // pages/index/index.ts
 import { post, upload } from "../../utils/http"
+import Toast from '@vant/weapp/toast/toast';
 
 Page({
 
@@ -81,7 +82,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    return {
+      title: '一个不错的打牌记账程序～',
+      path: '/pages/index/index',
+      imageUrl: '/images/share.png',
+    }
   }
 
   , setHead(e: Object) {
@@ -93,10 +98,9 @@ Page({
   },
 
   setName(e: Object) {
-    post('setUserName', { userName: e.detail.value }).then(() => {
-      this.setData({
-        userName: e.detail.value
-      })
+    post('setUserName', { userName: e.detail.value });
+    this.setData({
+      userName: e.detail.value
     })
   },
 
@@ -115,12 +119,12 @@ Page({
         });
       }
     } else {
-      wx.showToast({ title: '请填写用户名后再创建房间', icon: 'none', duration: 3000 })
+      Toast('请填写用户名后再创建房间');
     }
   },
 
   toHistory() {
-    wx.showToast({ title: '开发者正在努力开发中～', icon: 'none', duration: 3000 })
+    Toast('作者正在努力开发中,敬请期待～');
     // wx.navigateTo({
     //   url: '/pages/history/history'
     // })
