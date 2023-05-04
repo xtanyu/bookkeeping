@@ -71,3 +71,14 @@ page {
   top: 7%;
   left: 7%;
 }
+
+.hidden-text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical;
+  width: 80px;
+  display: flex;
+  justify-content: flex-start;
+}

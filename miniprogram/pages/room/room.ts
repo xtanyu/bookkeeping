@@ -15,9 +15,10 @@ Page({
     showShare: false,
     options: [
       { name: '微信', icon: '/images/wx.png', openType: 'share' },
-      // { name: '小程序码', icon: '/images/code.png' },
+      { name: '房间二维码', icon: '/images/code.png' },
     ],
     showCode: false,
+    roomCode: '',
     roomId: undefined,
     roomNo: '未知',
     myPointInfoVo: {
@@ -28,7 +29,7 @@ Page({
     otherPointInfoVoArr: [],
     payeeUserId: undefined,
     payeeUserName: undefined,
-    tansferDetails:[]
+    tansferDetails: []
   },
   init() {
     if (this.data.roomId) {
@@ -47,6 +48,11 @@ Page({
   onLoad(param: any) {
     this.setData({
       roomId: param.roomId
+    })
+    post('getRoomCode', { roomId: param.roomId }).then((codeUrl: string) => {
+      this.setData({
+        roomCode: codeUrl
+      })
     })
     this.init();
   },
@@ -132,6 +138,7 @@ Page({
     })
   },
   keyboardClick(event: Object) {
+    wx.vibrateShort()
     const key = event.currentTarget.dataset.key;
     let money = this.data.money;
     if (key == '.') {
@@ -207,6 +214,11 @@ Page({
       showShare: false
     })
   },
+  codeClose() {
+    this.setData({
+      showCode: false
+    })
+  },
   onSelect(event: Object) {
     if (event.detail.index === 1) {
       this.setData({
@@ -216,9 +228,9 @@ Page({
     this.onCloseShare();
   },
   toHistory() {
-    Toast('作者正在努力开发中,敬请期待～');
-    // wx.navigateTo({
-    //   url: '/pages/history/history'
-    // })
+    //    Toast('作者正在努力开发中,敬请期待～');
+    wx.navigateTo({
+      url: '/pages/history/history'
+    })
   }
 })

@@ -94,3 +94,12 @@ page {
   overflow: hidden;
   justify-content: flex-end; 
 }
+
+.hidden-text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical;
+  width: 80px;
+}

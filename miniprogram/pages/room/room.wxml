@@ -26,16 +26,21 @@
 
 </view>
 
-<!-- <van-icon info="返回" class="exit-icon" name="revoke" size="25" bindtap="toLast" /> -->
 
 <view style="padding-bottom: 4%;padding-top: 4%; display: flex;">
   <van-button style="margin-right: auto;margin-left: 5%;" plain type="danger" size="small" round icon="/images/exit.png" bind:click="toIndex">
     结束本局
   </van-button>
-  <van-button style="margin-left: auto;margin-right: 5%;" plain type="info" size="small" round icon="plus" bind:click="invite">邀请好友</van-button>
+  <van-button style="margin-left: auto;margin-right: 5%;" plain type="info" size="small" round icon="plus" bind:click="invite" >邀请好友</van-button>
 </view>
 
-<div wx:if="{{otherPointInfoVoArr.length<1}}" style="display: flex;justify-content: center;color: rgb(189, 189, 189);padding-top: 25%;">暂无其他用户～</div>
+<!-- <div wx:if="{{otherPointInfoVoArr.length<1}}" style="display: flex;justify-content: center;color: rgb(189, 189, 189);padding-top: 25%;">暂无其他用户～</div> -->
+<van-empty wx:if="{{otherPointInfoVoArr.length<1}}" image="{{roomCode}}"  description="邀请好友扫码加入本房间">
+  <text style="color: rgb(179, 172, 172);font-size: 13px;"></text>
+</van-empty>
+
+
+
 
 <div wx:for="{{otherPointInfoVoArr}}" wx:key="userId">
   <view style="padding-bottom: 8px;">
@@ -44,7 +49,7 @@
         <view slot="title" style="display: flex;align-items: center">
           <image class="image-container" src="{{item.userAvatar}}" mode="aspectFill"></image>
           <view>
-            <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">{{item.userName}}</text>
+            <text class="hidden-text" style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);">{{item.userName}}</text>
           </view>
         </view>
         <view style="color: rgb(255, 0, 0);font-size: 16px;display: flex;align-items: center;justify-content: flex-end; ">
@@ -146,9 +151,9 @@
 </van-popup>
 
 <van-popup bind:close="closeDetails" root-portal="true" round show="{{ showDetails }}" position="bottom" custom-style=" display: flex;justify-content: center;flex-wrap:wrap;" closeable close-icon="close">
-  <van-empty wx:if="{{tansferDetails.length<1}}" style="height: 300px;padding-top: 15%;" description="暂无明细记录" wx:if="{{false}}" />
+  <van-empty wx:if="{{tansferDetails.length<1}}" style="height: 300px;padding-top: 15%;" description="暂无明细记录" />
 
-  <scroll-view scroll-y="true" style="height: 320px;padding-top: 15%;width: 90%;">
+  <scroll-view wx:else scroll-y="true" style="height: 320px;padding-top: 15%;width: 90%;">
     <view>
       <van-cell-group wx:for="{{tansferDetails}}" wx:key="detailsId">
         <van-cell center wx:if="{{item.payeeUserId === myPointInfoVo.userId}}">
@@ -160,12 +165,12 @@
             来自
             <image class="image-container" style="margin: 4px;" src="{{item.payerUserAvatar}}" mode="aspectFill"></image>
             <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">{{item.payerUserName}}</text>
+              <text class="hidden-text" style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);">{{item.payerUserName}}</text>
             </view>
           </view>
         </van-cell>
 
-        <van-cell center  wx:if="{{item.payerUserId === myPointInfoVo.userId}}">
+        <van-cell center wx:if="{{item.payerUserId === myPointInfoVo.userId}}">
           <view slot="title" style="padding-left: 10px;">
             <view style="color: rgb(60, 255, 0);font-size: 17px;">-{{item.points}}分</view>
             <view style="color: rgb(189, 189, 189);">{{item.time}}</view>
@@ -174,7 +179,7 @@
             转给
             <image class="image-container" style="margin: 4px;" src="{{item.payeeUserAvatar}}" mode="aspectFill"></image>
             <view>
-              <text style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);padding-top: 10%;">{{item.payeeUserName}}</text>
+              <text class="hidden-text"  style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);">{{item.payeeUserName}}</text>
             </view>
           </view>
         </van-cell>
@@ -188,8 +193,10 @@
 <van-share-sheet show="{{ showShare }}" title="邀请好友" options="{{ options }}" bind:select="onSelect" bind:close="onCloseShare" />
 
 
-<van-dialog confirmButtonText="关闭" use-slot title="分享二维码" show="{{ showCode }}">
-  <image style="width: 80%;margin: 10% 10%" src="/images/code_test.jpg" />
+<van-dialog bind:close="codeClose" confirmButtonText="关闭" use-slot title="邀请好友扫码加入本房间" show="{{ showCode }}">
+  <view style="width: 100%;display: flex;justify-content: center;padding-top: 5%;padding-bottom: 5%;">
+    <image style="width: 500rpx;height: 500rpx;" src="{{roomCode}}" show-menu-by-longpress="true"/>
+  </view>
 </van-dialog>
 
 <van-dialog id="van-dialog" />

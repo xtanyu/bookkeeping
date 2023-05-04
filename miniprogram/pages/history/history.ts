@@ -1,4 +1,5 @@
 // pages/history/history.ts
+import { post, upload } from "../../utils/http"
 Page({
 
   /**
@@ -6,7 +7,12 @@ Page({
    */
   data: {
     showDisclaimer: false,
-    showHistory:false
+    showHistory: false,
+    pointSum: 0,
+    usagesCount: 0,
+    userAvatar: "",
+    userName: "未知用户",
+    userHistoryInfoDetails:[]
   },
 
   /**
@@ -27,7 +33,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    post('userHistoryInfo').then((res: any) => {
+      this.setData({
+        ...res
+      })
+    });
   },
 
   /**
@@ -82,14 +92,32 @@ Page({
       data: 'admin@xtyu.top'
     })
   },
-  showHistory(){
+  showHistory() {
+    post('userHistoryInfoDetails').then((res: any) => {
+      this.setData({
+        showHistory: true,
+        userHistoryInfoDetails: res
+      })
+    });
+
+  },
+  closeHistory() {
     this.setData({
-      showHistory:true
+      showHistory: false
     })
   },
-  closeHistory(){
-    this.setData({
-      showHistory:false
+  setHead(e: Object) {
+    upload('setUserAvatar', e.detail.avatarUrl, 'userAvatar').then(() => {
+      this.setData({
+        userAvatar: e.detail.avatarUrl
+      })
     })
-  }
+  },
+
+  setName(e: Object) {
+    post('setUserName', { userName: e.detail.value });
+    this.setData({
+      userName: e.detail.value
+    })
+  },
 })

@@ -17,19 +17,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(param: any) {
-    post("getUserInfo").then((res: any) => {
-      this.setData({
-        headUrl: res.userAvatar,
-        userName: res.userName
-      })
-      if (param.roomId) {
-        post("joinRoom", { roomId: param.roomId }).then((roomRes: any) => {
-          wx.navigateTo({
-            url: '/pages/room/room?roomId=' + roomRes.id
-          })
+    if (param.roomId || param.scene) {
+      var roomId = param.roomId ? param.roomId : param.scene;
+      post("joinRoom", { roomId: roomId }).then((roomRes: any) => {
+        wx.navigateTo({
+          url: '/pages/room/room?roomId=' + roomRes.id
         })
-      }
-    });
+      })
+    }
   },
 
   /**
@@ -43,10 +38,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    post("getRoomInfo").then((res: any) => {
-      this.setData({
-        usagesRoom: res
-      })
+    post("getUserInfo").then((res: any) => {
+      post("getRoomInfo").then((roomInfo: any) => {
+        this.setData({
+          headUrl: res.userAvatar,
+          userName: res.userName,
+          usagesRoom: roomInfo
+        })
+      });
     });
   },
 
@@ -124,9 +123,9 @@ Page({
   },
 
   toHistory() {
-    Toast('作者正在努力开发中,敬请期待～');
-    // wx.navigateTo({
-    //   url: '/pages/history/history'
-    // })
+    //    Toast('作者正在努力开发中,敬请期待～');
+    wx.navigateTo({
+      url: '/pages/history/history'
+    })
   }
 })

@@ -5,7 +5,7 @@
       <van-col custom-class="row-center" span="24">
         <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="setHead">
           <div class="avatar-wrapper">
-            <image class="avatar" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head1.png" mode="aspectFill"></image>
+            <image class="avatar" src="{{userAvatar}}" mode="aspectFill"></image>
           </div>
         </button>
       </van-col>
@@ -13,19 +13,19 @@
     <van-row>
       <van-col custom-class="row-center" span="24">
         <div class="info-font">
-          小小熊
+          {{userName}}
         </div>
       </van-col>
     </van-row>
     <van-row>
       <van-col custom-class="row-center" span="12">
-        <div class="row-center,info-font" style="color: rgb(233, 25, 25);">+20</div>
-        <!-- <div class="row-center,info-font" style="color: green;">-20</div> -->
-        <div class="des-font">累计积分</div>
+        <div wx:if="{{pointSum>=0}}" class="row-center,info-font" style="color: rgb(233, 25, 25);">+{{pointSum}}</div>
+        <div wx:else class="row-center,info-font" style="color: green;">{{pointSum}}</div>
+        <div class="des-font" bindtap="showHistory" style="text-decoration: underline;">累计积分></div>
       </van-col>
       <van-col custom-class="row-center" span="12">
-        <div class="row-center,info-font">20</div>
-        <div bindtap="showHistory" class="des-font" style="text-decoration: underline;">历史场次 ></div>
+        <div class="row-center,info-font">{{usagesCount}}</div>
+        <div  class="des-font" >历史场次</div>
       </van-col>
     </van-row>
   </div>
@@ -39,14 +39,14 @@
     <van-cell custom-class="round-top" size="large" title="头像" center icon="user-circle-o">
       <view style="display: flex;">
         <button style="border: 1px solid #fff;width: 60px;height: 45px;margin-right: -10%;display: flex;align-items: center;justify-content: center;" plain open-type="chooseAvatar" bindchooseavatar="setHead">
-          <image style="width: 30px;height: 30px;  border-radius: 50%;box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" mode="aspectFill"></image>
+          <image style="width: 30px;height: 30px;  border-radius: 50%;box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);" src="{{userAvatar}}" mode="aspectFill"></image>
         </button>
         <van-icon name="arrow" />
       </view>
     </van-cell>
     <van-cell custom-class="round-bottom" size="large" title="昵称" center icon="coupon-o">
       <view style="display: flex;">
-        <input style="color: rgb(0, 0, 0);" class="input-style" type="text" placeholder="请输入昵称" />
+        <input style="color: rgb(0, 0, 0);" class="input-style" placeholder="请输入昵称" type="nickname" value="{{userName}}" bindblur="setName" />
         <van-icon name="arrow" />
       </view>
     </van-cell>
@@ -77,119 +77,20 @@
 
 
 <van-popup bind:close="closeHistory" root-portal="true" round show="{{ showHistory }}" position="bottom" custom-style=" display: flex;justify-content: center;flex-wrap:wrap;" closeable close-icon="close">
-  <van-empty style="height: 300px;padding-top: 15%;" description="暂无历史记录" wx:if="{{false}}" />
-
+  <van-empty wx:if="{{userHistoryInfoDetails.length<1}}" style="height: 300px;padding-top: 15%;" description="暂无历史记录" wx:if="{{false}}" />
   <scroll-view scroll-y="true" style="height: 320px;padding-top: 15%;width: 90%;">
     <view>
-      <van-cell-group>
-        <van-cell is-link center>
-          <view slot="title" >
-            <view style="font-weight: bold;font-size: 16px;color: rgb(0, 0, 0);">小黑的房间</view>
-            <view style="color: rgb(189, 189, 189);">2022-10-22 18:56:02</view>
+      <van-cell-group wx:for="{{userHistoryInfoDetails}}" wx:key="index" wx:for-item="room">
+        <van-cell center>
+          <view slot="title">
+            <view style="font-weight: bold;font-size: 16px;color: rgb(0, 0, 0);">
+            <text>{{room.mUserName}}</text>的房间</view>
+            <view style="color: rgb(189, 189, 189);">{{room.createTime}}</view>
           </view>
-          <view class="avatar-list">
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head3.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head4.png" />
-            <image style="margin-right: 0%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head5.png" />
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell is-link center>
-          <view slot="title" >
-            <view style="font-weight: bold;font-size: 16px;color: rgb(0, 0, 0);">小黑的房间</view>
-            <view style="color: rgb(189, 189, 189);">2022-10-22 18:56:02</view>
-          </view>
-          <view class="avatar-list">
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head3.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head4.png" />
-            <image style="margin-right: 0%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head5.png" />
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell is-link center>
-          <view slot="title" >
-            <view style="font-weight: bold;font-size: 16px;color: rgb(0, 0, 0);">小黑的房间</view>
-            <view style="color: rgb(189, 189, 189);">2022-10-22 18:56:02</view>
-          </view>
-          <view class="avatar-list">
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head3.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head4.png" />
-            <image style="margin-right: 0%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head5.png" />
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell is-link center>
-          <view slot="title" >
-            <view style="font-weight: bold;font-size: 16px;color: rgb(0, 0, 0);">小黑的房间</view>
-            <view style="color: rgb(189, 189, 189);">2022-10-22 18:56:02</view>
-          </view>
-          <view class="avatar-list">
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head3.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head4.png" />
-            <image style="margin-right: 0%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head5.png" />
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell is-link center>
-          <view slot="title" >
-            <view style="font-weight: bold;font-size: 16px;color: rgb(0, 0, 0);">小黑的房间</view>
-            <view style="color: rgb(189, 189, 189);">2022-10-22 18:56:02</view>
-          </view>
-          <view class="avatar-list">
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head3.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head4.png" />
-            <image style="margin-right: 0%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head5.png" />
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell is-link center>
-          <view slot="title" >
-            <view style="font-weight: bold;font-size: 16px;color: rgb(0, 0, 0);">小黑的房间</view>
-            <view style="color: rgb(189, 189, 189);">2022-10-22 18:56:02</view>
-          </view>
-          <view class="avatar-list">
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head3.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head4.png" />
-            <image style="margin-right: 0%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head5.png" />
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell is-link center>
-          <view slot="title" >
-            <view style="font-weight: bold;font-size: 16px;color: rgb(0, 0, 0);">小黑的房间</view>
-            <view style="color: rgb(189, 189, 189);">2022-10-22 18:56:02</view>
-          </view>
-          <view class="avatar-list">
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head3.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head4.png" />
-            <image style="margin-right: 0%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head5.png" />
-          </view>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group>
-        <van-cell is-link center>
-          <view slot="title" >
-            <view style="font-weight: bold;font-size: 16px;color: rgb(0, 0, 0);">小黑的房间</view>
-            <view style="color: rgb(189, 189, 189);">2022-10-22 18:56:02</view>
-          </view>
-          <view class="avatar-list">
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head2.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head3.png" />
-            <image style="margin-right: -10%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head4.png" />
-            <image style="margin-right: 0%;width: 70rpx;height: 70rpx;" src="https://bear-owo.oss-cn-shanghai.aliyuncs.com/head/head5.png" />
+          <view>
+            <div wx:if="{{room.mUserPoint>=0}}" class="info-font" style="color: rgb(233, 25, 25);padding-right: 8%;">{{room.mUserPoint}}</div>
+            <div wx:else class="info-font" style="color: green;padding-right: 8%;">{{room.mUserPoint}}
+            </div>
           </view>
         </van-cell>
       </van-cell-group>
