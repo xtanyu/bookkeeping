@@ -228,7 +228,6 @@ Page({
     this.onCloseShare();
   },
   toHistory() {
-    //    Toast('作者正在努力开发中,敬请期待～');
     wx.navigateTo({
       url: '/pages/history/history'
     })
