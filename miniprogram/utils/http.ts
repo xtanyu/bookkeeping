@@ -3,46 +3,6 @@
 const host = "https://bookkeeping.xtyu.top/api/bookkeeping/";
 //  const host = "http://127.0.0.1:8080/jeecg-boot/api/bookkeeping/";
 
-
-export function get(url: string, data: any = {}): Promise<any> {
-  wx.showLoading({ title: '' });
-  return new Promise((resolve) => {
-    wx.request({
-      url: host + url,
-      data: data,
-      method: "GET",
-      header: {
-        "openId": wx.getStorageSync("openId")
-      },
-      success: function (res) {
-        var data: any = res.data;
-        if (data.code == 401) {
-          loginAndSaveOpenId().then(() => {
-            get(url, data).then(() => {
-              post(url, data).then((res) => {
-                wx.hideLoading();
-                resolve(res)
-              });
-            });
-          })
-        } else {
-          wx.hideLoading();
-          if (!data.success) {
-            wx.showToast({ title: data.message, icon: 'none',duration:3000 })
-          } else {
-            resolve(data.result)
-          }
-        }
-      },
-      fail: function () {
-        wx.hideLoading();
-        wx.showToast({ title: '网络异常', icon: 'none',duration:3000 });
-      }
-    });
-  });
-}
-
-
 export function post(url: string, data: any = {}): Promise<any> {
   wx.showLoading({ title: '' });
   return new Promise((resolve) => {
@@ -55,8 +15,8 @@ export function post(url: string, data: any = {}): Promise<any> {
         "openId": wx.getStorageSync("openId")
       },
       success: function (res) {
-        var data: any = res.data;
-        if (data.code == 401) {
+        var rData: any = res.data;
+        if (rData.code == 401) {
           loginAndSaveOpenId().then(() => {
             post(url, data).then((res) => {
               wx.hideLoading();
@@ -65,10 +25,10 @@ export function post(url: string, data: any = {}): Promise<any> {
           })
         } else {
           wx.hideLoading();
-          if (!data.success) {
-            wx.showToast({ title: data.message, icon: 'none',duration:3000 })
+          if (!rData.success) {
+            wx.showToast({ title: rData.message, icon: 'none',duration:3000 })
           } else {
-            resolve(data.result)
+            resolve(rData.result)
           }
         }
       },
@@ -147,7 +107,6 @@ function loginAndSaveOpenId(): Promise<void> {
 }
 
 export default {
-  get,
   post,
   upload
 }
