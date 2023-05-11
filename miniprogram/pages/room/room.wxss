@@ -73,7 +73,6 @@ page {
 }
 
 .hidden-text{
-  overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1; 
@@ -81,8 +80,9 @@ page {
   width: 80px;
   display: flex;
   justify-content: flex-start;
+  white-space: nowrap;
 }
 
 .round{
-  border-radius: 100px;
+  border-radius: 15px;
 }

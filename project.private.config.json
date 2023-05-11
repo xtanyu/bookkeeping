@@ -3,7 +3,7 @@
   "projectname": "bookkeeping",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": false
+    "urlCheck": true
   },
   "libVersion": "2.30.4",
   "condition": {
@@ -26,7 +26,7 @@
         {
           "name": "首页",
           "pathName": "pages/index/index",
-          "query": "roomId=1656597242099908609",
+          "query": "roomId=1656632207034339330",
           "launchMode": "default",
           "scene": null
         }
