@@ -86,8 +86,8 @@
 
 
 <van-popup bind:close="closeHistory" root-portal="true" round show="{{ showHistory }}" position="bottom" custom-style=" display: flex;justify-content: center;flex-wrap:wrap;" closeable close-icon="close">
-  <van-empty wx:if="{{userHistoryInfoDetails.length<1}}" style="height: 300px;padding-top: 15%;" description="暂无历史记录" wx:if="{{false}}" />
-  <scroll-view scroll-y="true" style="height: 320px;padding-top: 15%;width: 90%;">
+  <van-empty wx:if="{{userHistoryInfoDetails.length<1}}" style="height: 300px;padding-top: 15%;" description="暂无历史记录"/>
+  <scroll-view wx:else scroll-y="true" style="height: 320px;padding-top: 15%;width: 90%;">
     <view>
       <van-cell-group wx:for="{{userHistoryInfoDetails}}" wx:key="index" wx:for-item="room">
         <van-cell center>

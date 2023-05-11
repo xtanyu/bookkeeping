@@ -1,6 +1,6 @@
-//const host = "https://bookkeeping.xtyu.top/api/bookkeeping/";
-const host = "http://192.168.0.106:8080/api/bookkeeping/";
-export const roomWebsocket = "ws://192.168.0.106:8080/websocket/room/";
+const host = "https://bookkeeping.xtyu.top/api/bookkeeping/";
+// const host = "http://192.168.0.106:8080/api/bookkeeping/";
+export const roomWebsocket = "wss://bookkeeping.xtyu.top/websocket/room/";
 
 export function post(url: string, data: any = {}): Promise<any> {
   wx.showLoading({ title: '' });

@@ -62,7 +62,7 @@
   </view>
 </div>
 
-<text wx:if="{{codeClose}}" style="display: flex; justify-content: center;color: #1989fa;font-size: 14px;text-decoration: underline;padding-top: 30px;" bindtap="codeOpenMethod">显示邀请码</text>
+<text wx:if="{{codeClose}}" style="display: flex; justify-content: center;color: #1989fa;font-size: 14px;text-decoration: underline;padding-top: 15px;" bindtap="codeOpenMethod">显示邀请码</text>
 
 <van-empty wx:else image="{{roomCode}}" description="邀请好友扫码加入本房间">
   <view style="margin-top:-22px;">
