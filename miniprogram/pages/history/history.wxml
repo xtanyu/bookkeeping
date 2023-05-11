@@ -37,20 +37,29 @@
 <view style="padding-bottom: 8px;display: flex;align-items: center;justify-content: center;  flex-wrap: wrap;">
   <van-cell-group inset style="width: 90%;">
     <van-cell custom-class="round-top" size="large" title="头像" center icon="user-circle-o">
-      <view style="display: flex;">
+      <view style="display: flex;justify-content: flex-end;">
         <button style="border: 1px solid #fff;width: 60px;height: 45px;margin-right: -10%;display: flex;align-items: center;justify-content: center;" plain open-type="chooseAvatar" bindchooseavatar="setHead">
           <image style="width: 30px;height: 30px;  border-radius: 50%;box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);" src="{{userAvatar}}" mode="aspectFill"></image>
         </button>
         <van-icon name="arrow" />
       </view>
     </van-cell>
-    <van-cell custom-class="round-bottom" size="large" title="昵称" center icon="coupon-o">
-      <view style="display: flex;">
+    <van-cell size="large" custom-class="round-bottom"  title="昵称" center icon="coupon-o">
+      <view style="display: flex;justify-content: flex-end;">
         <input style="color: rgb(0, 0, 0);" class="input-style" placeholder="请输入昵称" type="nickname" value="{{userName}}" bindblur="setName" />
         <van-icon name="arrow" />
       </view>
     </van-cell>
+
+    <!-- <van-cell custom-class="round-bottom" size="large" title="清除数据" center icon="delete-o">
+      <view style="display: flex;justify-content: flex-end;">
+        <van-icon name="arrow" />
+      </view>
+    </van-cell> -->
+
   </van-cell-group>
+
+  
   <van-cell-group inset style="width: 90%;padding-top: 5%;">
     <van-cell custom-class="round-bottom round-top" size="large" title="免责声明" center icon="warning-o" bind:click="showDisclaimer">
       <view>

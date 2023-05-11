@@ -82,3 +82,7 @@ page {
   display: flex;
   justify-content: flex-start;
 }
+
+.round{
+  border-radius: 100px;
+}

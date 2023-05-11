@@ -26,7 +26,7 @@
         {
           "name": "首页",
           "pathName": "pages/index/index",
-          "query": "roomId=1654067873108213762",
+          "query": "roomId=1656597242099908609",
           "launchMode": "default",
           "scene": null
         }

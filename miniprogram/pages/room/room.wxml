@@ -27,19 +27,22 @@
 </view>
 
 
-<view style="padding-bottom: 4%;padding-top: 4%; display: flex;">
+<view style="padding-bottom: 6%;padding-top: 4%; display: flex;">
   <van-button style="margin-right: auto;margin-left: 5%;" plain type="danger" size="small" round icon="/images/exit.png" bind:click="toIndex">
     结束本局
   </van-button>
-  <van-button style="margin-left: auto;margin-right: 5%;" plain type="info" size="small" round icon="plus" bind:click="invite" >邀请好友</van-button>
+
+  <!-- <van-button style="margin-left: auto;margin-right: 5%;" plain type="info" size="small" round icon="plus" bind:click="invite">邀请好友</van-button> -->
+
+  <van-button style="margin-left: auto;margin-right: 5%;" plain type="primary" size="small" open-type="share" round icon="chat-o">微信邀请</van-button>
+
 </view>
 
 
-
-<!-- <div wx:for="{{otherPointInfoVoArr}}" wx:key="userId">
+<div wx:for="{{otherPointInfoVoArr}}" wx:key="userId">
   <view style="padding-bottom: 8px;">
     <van-cell-group inset>
-      <van-cell center>
+      <van-cell center custom-class="round">
         <view slot="title" style="display: flex;align-items: center">
           <image class="image-container" src="{{item.userAvatar}}" mode="aspectFill"></image>
           <view>
@@ -57,16 +60,15 @@
       </van-cell>
     </van-cell-group>
   </view>
-</div> -->
+</div>
 
+<text wx:if="{{codeClose}}" style="display: flex; justify-content: center;color: #1989fa;font-size: 14px;text-decoration: underline;padding-top: 30px;" bindtap="codeOpenMethod">显示邀请码</text>
 
-<van-empty  image="{{roomCode}}"  description="邀请好友扫码加入本房间" >
-
-   <view style="margin-top:-22px;">
-    <text style="color: #969799;font-size: 14px;">好友进入房间后可</text>
-    <text style="color: #1989fa;font-size: 14px;text-decoration: underline;padding-bottom: 40px;" bindtap="init">点此刷新好友列表</text>
-   </view>
-
+<van-empty wx:else image="{{roomCode}}" description="邀请好友扫码加入本房间">
+  <view style="margin-top:-22px;">
+    <!-- <text style="color: #969799;font-size: 14px;">好友进入房间后可</text> -->
+    <text style="color: #ee0a24;font-size: 14px;text-decoration: underline;padding-bottom: 40px;" bindtap="codeCloseMethod">隐藏邀请码</text>
+  </view>
 </van-empty>
 
 
@@ -182,7 +184,7 @@
             转给
             <image class="image-container" style="margin: 4px;" src="{{item.payeeUserAvatar}}" mode="aspectFill"></image>
             <view>
-              <text class="hidden-text"  style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);">{{item.payeeUserName}}</text>
+              <text class="hidden-text" style="font-weight: bold;font-size: 15px;color: rgb(0, 0, 0);">{{item.payeeUserName}}</text>
             </view>
           </view>
         </van-cell>
@@ -198,7 +200,7 @@
 
 <van-dialog bind:close="codeClose" confirmButtonText="关闭" use-slot title="邀请好友扫码加入本房间" show="{{ showCode }}">
   <view style="width: 100%;display: flex;justify-content: center;padding-top: 5%;padding-bottom: 5%;">
-    <image style="width: 500rpx;height: 500rpx;" src="{{roomCode}}" show-menu-by-longpress="true"/>
+    <image style="width: 500rpx;height: 500rpx;" src="{{roomCode}}" show-menu-by-longpress="true" />
   </view>
 </van-dialog>
 

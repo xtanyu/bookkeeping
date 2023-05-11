@@ -5,7 +5,7 @@ App<IAppOption>({
     const updateManager = wx.getUpdateManager()
 
     updateManager.onCheckForUpdate(function (res) {
-      console.log("版本更新:"+res.hasUpdate)
+      console.log("版本更新:" + res.hasUpdate)
     })
 
     updateManager.onUpdateReady(function () {
@@ -23,6 +23,6 @@ App<IAppOption>({
     updateManager.onUpdateFailed(function () {
       // 新版本下载失败
     })
-
+    
   },
 })

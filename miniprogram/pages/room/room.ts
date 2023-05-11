@@ -1,7 +1,7 @@
 // pages/room/room.ts
 import Toast from '@vant/weapp/toast/toast';
 import Dialog from '@vant/weapp/dialog/dialog';
-import { post } from "../../utils/http"
+import { post, roomWebsocket } from "../../utils/http"
 
 Page({
 
@@ -29,7 +29,9 @@ Page({
     otherPointInfoVoArr: [],
     payeeUserId: undefined,
     payeeUserName: undefined,
-    tansferDetails: []
+    tansferDetails: [],
+    ws: undefined,
+    codeClose: false
   },
   init() {
     if (this.data.roomId) {
@@ -55,12 +57,40 @@ Page({
       })
     })
     this.init();
+    this.connectSocket();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
+
+  },
+
+  connectSocket() {
+
+    let that = this;
+    wx.connectSocket({
+      url: roomWebsocket + this.data.roomId,
+      success: function () {
+        console.log('webSocket连接创建成功');
+      }
+    });
+
+    wx.onSocketMessage(function (res) {
+      console.log('收到服务器消息：' + res.data);
+      that.init();
+    });
+
+    wx.onSocketError(function (res) {
+      console.log('webSocket连接错误：' + res.errMsg);
+      wx.connectSocket({
+        url: roomWebsocket + that.data.roomId,
+        success: function () {
+          console.log('webSocket连接创建成功');
+        }
+      });
+    });
 
   },
 
@@ -191,10 +221,15 @@ Page({
   toIndex() {
     Dialog.confirm({
       title: '温馨提示',
-      message: '确定结束本次对局吗,结束后房间内其他用户将无法向你转让积分。'
+      message: '确定结束本次对局吗?'
     }).then(() => {
       post('exitRoom', { roomId: this.data.roomId }).then(() => {
         wx.navigateBack();
+        wx.closeSocket({
+          success: function () {
+            console.log('webSocket连接关闭成功');
+          }
+        });
       });
     }).catch(() => {
 
@@ -230,6 +265,16 @@ Page({
   toHistory() {
     wx.navigateTo({
       url: '/pages/history/history'
+    })
+  },
+  codeCloseMethod() {
+    this.setData({
+      codeClose: true
+    })
+  },
+  codeOpenMethod(){
+    this.setData({
+      codeClose: false
     })
   }
 })
