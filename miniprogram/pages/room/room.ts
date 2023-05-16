@@ -57,7 +57,6 @@ Page({
       })
     })
     this.init();
-    this.connectSocket();
   },
 
   /**
@@ -98,7 +97,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.connectSocket();
   },
 
   /**
@@ -112,7 +111,11 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    wx.closeSocket({
+      success: function () {
+        console.log('webSocket连接关闭成功');
+      }
+    });
   },
 
   /**
@@ -225,11 +228,6 @@ Page({
     }).then(() => {
       post('exitRoom', { roomId: this.data.roomId }).then(() => {
         wx.navigateBack();
-        wx.closeSocket({
-          success: function () {
-            console.log('webSocket连接关闭成功');
-          }
-        });
       });
     }).catch(() => {
 
