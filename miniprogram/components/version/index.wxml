@@ -1,0 +1,3 @@
+<div class="container">
+  <text class="text">{{version}}</text>
+</div>

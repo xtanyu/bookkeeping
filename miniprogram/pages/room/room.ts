@@ -31,7 +31,8 @@ Page({
     payeeUserName: undefined,
     tansferDetails: [],
     ws: undefined,
-    codeClose: false
+    codeClose: false,
+    showGuide: false
   },
   init() {
     if (this.data.roomId) {
@@ -53,7 +54,8 @@ Page({
     })
     post('getRoomCode', { roomId: param.roomId }).then((codeUrl: string) => {
       this.setData({
-        roomCode: codeUrl
+        roomCode: codeUrl,
+        showGuide: !(wx.getStorageSync("addNoPrompt") == true)
       })
     })
     this.init();
@@ -270,9 +272,12 @@ Page({
       codeClose: true
     })
   },
-  codeOpenMethod(){
+  codeOpenMethod() {
     this.setData({
       codeClose: false
     })
+  },
+  noPrompt() {
+    wx.setStorageSync("addNoPrompt", true);
   }
 })

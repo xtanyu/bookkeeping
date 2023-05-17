@@ -1,0 +1,12 @@
+/* components/version/index.wxss */
+.container{
+  position: absolute; 
+  bottom: 3%;  
+  width: 100%; 
+  text-align: center;
+}
+.text{
+  font-family: PMingLiU;
+  color: #969799;
+  font-size: 14px;
+}

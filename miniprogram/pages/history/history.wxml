@@ -31,9 +31,6 @@
   </div>
 </view>
 
-<van-icon info="返回" class="exit-icon" name="revoke" size="25" bindtap="toLast" />
-
-
 <view style="padding-bottom: 8px;display: flex;align-items: center;justify-content: center;  flex-wrap: wrap;">
   <van-cell-group inset style="width: 90%;">
     <van-cell custom-class="round-top" size="large" title="头像" center icon="user-circle-o">
@@ -109,3 +106,7 @@
 
 
 <van-toast id="van-toast" />
+
+<version/>
+
+<van-icon info="返回" class="exit-icon" name="revoke" size="25" bindtap="toLast" />

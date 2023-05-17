@@ -197,11 +197,27 @@
 
 <van-share-sheet show="{{ showShare }}" title="邀请好友" options="{{ options }}" bind:select="onSelect" bind:close="onCloseShare" />
 
-
-<van-dialog bind:close="codeClose" confirmButtonText="关闭" use-slot title="邀请好友扫码加入本房间" show="{{ showCode }}">
+<!-- <van-dialog bind:close="codeClose" confirmButtonText="关闭" use-slot title="邀请好友扫码加入本房间" show="{{ showCode }}">
   <view style="width: 100%;display: flex;justify-content: center;padding-top: 5%;padding-bottom: 5%;">
     <image style="width: 500rpx;height: 500rpx;" src="{{roomCode}}" show-menu-by-longpress="true" />
   </view>
-</van-dialog>
+</van-dialog> -->
 
 <van-dialog id="van-dialog" />
+
+<van-dialog title="添加到我的小程序指引" bind:confirm="noPrompt" use-slot show="{{ showGuide }}" confirm-button-text="我已知晓">
+  <div class="step" style="padding-top: 5%;">
+    <van-icon name="/images/step1.png" size="18px" /><text class="step-text">点击右上角的</text>
+    <van-icon name="/images/menu.png" size="25px" />
+  </div>
+  <div class="step pt2">
+    <van-icon name="/images/step2.png" size="18px" /><text class="step-text">点击添加到我的小程序</text>
+    <van-icon name="/images/add.png" size="20px" />
+  </div>
+  <div class="step pt2">
+    <van-icon name="/images/step3.png" size="18px" /><text class="step-text">微信首页下拉可快速找到本程序</text>
+  </div>
+  <view class="pt2 center" style="padding-bottom: 3%;">
+    <image style="width: 90%;height:325rpx;border-radius:10px" src="/images/my.png" show-menu-by-longpress="true" />
+  </view>
+</van-dialog>

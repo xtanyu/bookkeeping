@@ -31,3 +31,6 @@
 </view>
 
 <van-toast id="van-toast" />
+
+
+<version/>

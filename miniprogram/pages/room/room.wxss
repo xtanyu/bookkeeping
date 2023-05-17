@@ -86,3 +86,25 @@ page {
 .round{
   border-radius: 15px;
 }
+
+.step{
+  align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  padding-left: 5%;
+  flex-wrap: wrap;
+}
+
+.step-text{
+  padding-left: 1%;
+}
+
+.pt2{
+  padding-top: 2%;
+}
+
+.center{
+  display:flex;
+  justify-content:center;
+}
