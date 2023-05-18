@@ -32,7 +32,7 @@ Page({
     tansferDetails: [],
     ws: undefined,
     codeClose: false,
-    showGuide: false
+    showGuide: false,
   },
   init() {
     if (this.data.roomId) {
@@ -69,7 +69,6 @@ Page({
   },
 
   connectSocket() {
-
     let that = this;
     wx.connectSocket({
       url: roomWebsocket + this.data.roomId,
@@ -92,7 +91,6 @@ Page({
         }
       });
     });
-
   },
 
   /**
@@ -106,7 +104,11 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide() {
-
+    wx.closeSocket({
+      success: function () {
+        console.log('webSocket连接关闭成功');
+      }
+    });
   },
 
   /**
@@ -141,7 +143,7 @@ Page({
     return {
       title: '邀请您进入记账房间(' + this.data.roomNo + ')',
       path: '/pages/index/index?roomId=' + this.data.roomId,
-      imageUrl: '/images/share.png',
+      imageUrl: 'https://kodo.xtyu.top/bookkeeping/static/share.png',
     }
   },
 
@@ -221,6 +223,9 @@ Page({
       })
       this.init();
       Toast('转账成功');
+      wx.sendSocketMessage({
+        data: '转账给用户' + this.data.payeeUserId
+      })
     })
   },
   toIndex() {

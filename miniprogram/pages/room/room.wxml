@@ -218,6 +218,6 @@
     <van-icon name="/images/step3.png" size="18px" /><text class="step-text">微信首页下拉可快速找到本程序</text>
   </div>
   <view class="pt2 center" style="padding-bottom: 3%;">
-    <image style="width: 90%;height:325rpx;border-radius:10px" src="/images/my.png" show-menu-by-longpress="true" />
+    <image style="width: 90%;height:325rpx;border-radius:10px" src="https://kodo.xtyu.top/bookkeeping/static/my.png" show-menu-by-longpress="true" />
   </view>
 </van-dialog>

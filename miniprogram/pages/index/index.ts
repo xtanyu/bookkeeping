@@ -84,7 +84,7 @@ Page({
     return {
       title: '一个不错的打牌记账程序～',
       path: '/pages/index/index',
-      imageUrl: '/images/share.png',
+      imageUrl: 'https://kodo.xtyu.top/bookkeeping/static/share.png',
     }
   }
 
