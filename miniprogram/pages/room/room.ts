@@ -1,7 +1,7 @@
 // pages/room/room.ts
 import Toast from '@vant/weapp/toast/toast';
 import Dialog from '@vant/weapp/dialog/dialog';
-import { post, roomWebsocket } from "../../utils/http"
+import { post, roomWebsocket, apiKey } from "../../utils/http"
 
 Page({
 
@@ -33,6 +33,7 @@ Page({
     ws: undefined,
     codeClose: false,
     showGuide: false,
+    websocketRetryCount: 0
   },
   init() {
     if (this.data.roomId) {
@@ -49,9 +50,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(param: any) {
+
     this.setData({
       roomId: param.roomId
     })
+
     post('getRoomCode', { roomId: param.roomId }).then((codeUrl: string) => {
       this.setData({
         roomCode: codeUrl,
@@ -59,6 +62,26 @@ Page({
       })
     })
     this.init();
+
+    //监听消息
+    let that = this;
+    wx.onSocketMessage(function (res) {
+      console.log('收到服务器消息：' + res.data);
+      that.init();
+    });
+    wx.onSocketError(function (res) {
+      console.log('webSocket连接错误：' + res.errMsg);
+      if (that.data.websocketRetryCount <= 5) {
+        console.log('尝试重新连接第' + that.data.websocketRetryCount + '次');
+        that.openSocketConnect();
+        that.data.websocketRetryCount = that.data.websocketRetryCount + 1;
+      } else {
+        console.log('超过尝试重新连接次数');
+      }
+    });
+    wx.onSocketClose(function (res) {
+      console.log(res);
+    });
   },
 
   /**
@@ -68,28 +91,15 @@ Page({
 
   },
 
-  connectSocket() {
-    let that = this;
+  openSocketConnect() {
     wx.connectSocket({
-      url: roomWebsocket + this.data.roomId,
-      success: function () {
-        console.log('webSocket连接创建成功');
+      url: roomWebsocket + this.data.roomId + "?apiKey=" + apiKey,
+      success(res) {
+        console.log(res);
+      },
+      fail(err) {
+        console.log(err);
       }
-    });
-
-    wx.onSocketMessage(function (res) {
-      console.log('收到服务器消息：' + res.data);
-      that.init();
-    });
-
-    wx.onSocketError(function (res) {
-      console.log('webSocket连接错误：' + res.errMsg);
-      wx.connectSocket({
-        url: roomWebsocket + that.data.roomId,
-        success: function () {
-          console.log('webSocket连接创建成功');
-        }
-      });
     });
   },
 
@@ -97,7 +107,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    this.connectSocket();
+    this.data.websocketRetryCount = 0;
+    this.openSocketConnect();
   },
 
   /**

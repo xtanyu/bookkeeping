@@ -1,6 +1,6 @@
-const host = "https://bookkeeping.xtyu.top/api/bookkeeping/";
-// const host = "http://192.168.0.106:8080/api/bookkeeping/";
-export const roomWebsocket = "wss://bookkeeping.xtyu.top/websocket/room/";
+const host = "https://api.xtyu.top/v2/api/bookkeeping/";
+export const roomWebsocket = "wss://api.xtyu.top/v2/websocket/room/";
+export const apiKey = "ea18e92a774746c1a5dea4e7fbb0230c";
 
 export function post(url: string, data: any = {}): Promise<any> {
   wx.showLoading({ title: '' });
@@ -11,7 +11,8 @@ export function post(url: string, data: any = {}): Promise<any> {
       method: "POST",
       header: {
         "content-type": "application/x-www-form-urlencoded",
-        "openId": wx.getStorageSync("openId")
+        "openId": wx.getStorageSync("openId"),
+        "apiKey": apiKey
       },
       success: function (res) {
         var rData: any = res.data;
@@ -25,7 +26,7 @@ export function post(url: string, data: any = {}): Promise<any> {
         } else {
           wx.hideLoading();
           if (!rData.success) {
-            wx.showToast({ title: rData.message, icon: 'none',duration:3000 })
+            wx.showToast({ title: rData.message, icon: 'none', duration: 3000 })
           } else {
             resolve(rData.result)
           }
@@ -33,7 +34,7 @@ export function post(url: string, data: any = {}): Promise<any> {
       },
       fail: function () {
         wx.hideLoading();
-        wx.showToast({ title: '网络异常', icon: 'none',duration:3000 });
+        wx.showToast({ title: '网络异常', icon: 'none', duration: 3000 });
       }
     });
   });
@@ -48,7 +49,8 @@ export function upload(url: string, filePath: string, fileName: string, data: an
       name: fileName,
       formData: data,
       header: {
-        "openId": wx.getStorageSync("openId")
+        "openId": wx.getStorageSync("openId"),
+        "apiKey": apiKey
       },
       success: function (res) {
         var data: any = JSON.parse(res.data);
@@ -60,14 +62,14 @@ export function upload(url: string, filePath: string, fileName: string, data: an
           })
         } else {
           if (!data.success) {
-            wx.showToast({ title: data.message, icon: 'none',duration:3000 })
+            wx.showToast({ title: data.message, icon: 'none', duration: 3000 })
           } else {
             resolve(data.result)
           }
         }
       },
       fail: function () {
-        wx.showToast({ title: '网络异常', icon: 'none',duration:3000 });
+        wx.showToast({ title: '网络异常', icon: 'none', duration: 3000 });
       }
     });
   });
@@ -85,7 +87,8 @@ function loginAndSaveOpenId(): Promise<void> {
             data: { jsCode: res.code },
             method: "POST",
             header: {
-              "content-type": "application/x-www-form-urlencoded"
+              "content-type": "application/x-www-form-urlencoded",
+              "apiKey": apiKey
             },
             success: function (res) {
               var data: any = res.data;
@@ -93,10 +96,10 @@ function loginAndSaveOpenId(): Promise<void> {
                 wx.setStorageSync("openId", data.result)
                 resolve()
               } else {
-                wx.showToast({ title: data.message, icon: 'none' ,duration:3000})
+                wx.showToast({ title: data.message, icon: 'none', duration: 3000 })
               }
             }, fail: function () {
-              wx.showToast({ title: '网络异常', icon: 'none' ,duration:3000})
+              wx.showToast({ title: '网络异常', icon: 'none', duration: 3000 })
             }
           })
         }
@@ -108,5 +111,6 @@ function loginAndSaveOpenId(): Promise<void> {
 export default {
   post,
   upload,
-  roomWebsocket
+  roomWebsocket,
+  apiKey
 }
