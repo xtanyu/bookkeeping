@@ -124,7 +124,7 @@ Page({
 
     Dialog.confirm({
       title: '温馨提示',
-      message: '确定清除所有历史对局数据吗?'
+      message: '该操作会清空所有历史对局数据，但会保留正在进行中的对局数据，确定要清除吗？'
     }).then(() => {
       post('cleanHistoryData').then(() => {
         this.init()
