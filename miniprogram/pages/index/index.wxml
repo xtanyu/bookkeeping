@@ -20,7 +20,7 @@
 
 
   <view class="submit-button-container">
-    <van-button style="width: 70%;" custom-class="submit-button" round type="primary" color="linear-gradient(to right, #4bb0ff, #6149f6)" bind:click="putRoom">{{usagesRoom?'继续游戏':'创建房间'}}
+    <van-button style="width: 70%;" custom-class="submit-button" round type="primary" color="linear-gradient(to right, #4bb0ff, #6149f6)" bind:click="putRoom">{{usagesRoom?'继续对局':'创建房间'}}
     </van-button>
   </view>
 

@@ -1,5 +1,6 @@
 // pages/history/history.ts
 import { post, upload } from "../../utils/http"
+import Dialog from '@vant/weapp/dialog/dialog'
 Page({
 
   /**
@@ -12,7 +13,7 @@ Page({
     usagesCount: 0,
     userAvatar: "",
     userName: "未知用户",
-    userHistoryInfoDetails:[]
+    userHistoryInfoDetails: []
   },
 
   /**
@@ -33,11 +34,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    post('userHistoryInfo').then((res: any) => {
-      this.setData({
-        ...res
-      })
-    });
+    this.init()
   },
 
   /**
@@ -68,7 +65,13 @@ Page({
 
   },
 
-
+  init() {
+    post('userHistoryInfo').then((res: any) => {
+      this.setData({
+        ...res
+      })
+    });
+  },
   toLast() {
     wx.navigateBack()
   },
@@ -96,11 +99,13 @@ Page({
     });
 
   },
+
   closeHistory() {
     this.setData({
       showHistory: false
     })
   },
+
   setHead(e: Object) {
     upload('setUserAvatar', e.detail.avatarUrl, 'userAvatar').then(() => {
       this.setData({
@@ -115,4 +120,17 @@ Page({
       userName: e.detail.value
     })
   },
+  cleanHistoryData() {
+
+    Dialog.confirm({
+      title: '温馨提示',
+      message: '确定清除所有历史对局数据吗?'
+    }).then(() => {
+      post('cleanHistoryData').then(() => {
+        this.init()
+      });
+    }).catch(() => {
+
+    });
+  }
 })

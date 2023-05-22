@@ -41,18 +41,18 @@
         <van-icon name="arrow" />
       </view>
     </van-cell>
-    <van-cell size="large" custom-class="round-bottom"  title="昵称" center icon="coupon-o">
+    <van-cell size="large"   title="昵称" center icon="coupon-o">
       <view style="display: flex;justify-content: flex-end;">
         <input style="color: rgb(0, 0, 0);" class="input-style" placeholder="请输入昵称" type="nickname" value="{{userName}}" bindblur="setName" />
         <van-icon name="arrow" />
       </view>
     </van-cell>
 
-    <!-- <van-cell custom-class="round-bottom" size="large" title="清除数据" center icon="delete-o">
+    <van-cell custom-class="round-bottom" size="large" title="清除数据" center icon="delete-o" bind:click="cleanHistoryData">
       <view style="display: flex;justify-content: flex-end;">
         <van-icon name="arrow" />
       </view>
-    </van-cell> -->
+    </van-cell>
 
   </van-cell-group>
 
@@ -110,3 +110,5 @@
 <version/>
 
 <van-icon info="返回" class="exit-icon" name="revoke" size="25" bindtap="toLast" />
+
+<van-dialog id="van-dialog" />
