@@ -70,11 +70,11 @@
 <van-popup bind:close="closeDisclaimer" root-portal="true" round show="{{ showDisclaimer }}" position="bottom" custom-style=" display: flex;justify-content: center;flex-wrap:wrap;" closeable close-icon="close">
   <div style="width: 80%;padding-top: 15%;display: flex;flex-wrap:wrap;margin-bottom: 8%;">
     <div style="font-size: 17px;padding-bottom: 5px;"><b>1.信息收集与使用</b></div>
-    <div style="font-weight: 60;font-size: 15px;">本小程序不要求用户授权任何权限,不会后台收集用户的任何信息,对于用户上传的的头像,昵称经腾讯安全校验后保存在开发者服务器中,开发者不对此信息提供保密,保管义务,如果介意可使用系统提供的默认头像昵称,程序使用过程中产生的数据归开发者所有。</div>
+    <div style="font-weight: 200;font-size: 15px;">本小程序不要求用户授权任何权限,不会后台收集用户的任何信息,对于用户上传的的头像,昵称经腾讯安全校验后保存在开发者服务器中,开发者不对此信息提供保密,保管义务,如果介意可使用系统提供的默认头像昵称,程序使用过程中产生的数据归开发者所有。</div>
     <div style="font-size: 17px;padding-bottom: 5px;padding-top: 13px;"><b>2.使用限制</b></div>
-    <div style="font-weight: 60;font-size: 15px;padding-bottom: 10px;">本小程序仅供学习娱乐使用,请勿用于非法活动,由此产生的后果,开发者概不负责。</div>
+    <div style="font-weight: 200;font-size: 15px;padding-bottom: 10px;">本小程序仅供学习娱乐使用,请勿用于非法活动,由此产生的后果,开发者概不负责。</div>
 
-    <div style="font-weight: 60;font-size: 15px;">如有问题请联系
+    <div style="font-weight: 200;font-size: 15px;">如有问题请联系
       <text bindtap="copyEmail" style="color: rgb(20, 66, 196);font-weight: bold; ">admin@xtyu.top</text>
     </div>
   </div>
