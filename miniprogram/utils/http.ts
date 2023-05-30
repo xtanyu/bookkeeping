@@ -1,9 +1,14 @@
-const host = "https://api.xtyu.top/v2/api/bookkeeping/";
-export const roomWebsocket = "wss://api.xtyu.top/v2/websocket/room/";
+// const host = "https://api.xtyu.top/v2/api/bookkeeping/";
+// export const roomWebsocket = "wss://api.xtyu.top/v2/websocket/room/";
+// export const apiKey = "ea18e92a774746c1a5dea4e7fbb0230c";
 export const apiKey = "ea18e92a774746c1a5dea4e7fbb0230c";
+const host = "http://127.0.0.1:8080/v2/api/bookkeeping/";
+export const roomWebsocket = "ws://127.0.0.1:8080/v2/websocket/room/";
 
-export function post(url: string, data: any = {}): Promise<any> {
-  wx.showLoading({ title: '' });
+export function post(url: string, data: any = {}, loading: boolean = false): Promise<any> {
+  if (loading) {
+    wx.showLoading({ title: '', mask: true });
+  }
   return new Promise((resolve) => {
     wx.request({
       url: host + url,
@@ -19,12 +24,16 @@ export function post(url: string, data: any = {}): Promise<any> {
         if (rData.code == 401) {
           loginAndSaveOpenId().then(() => {
             post(url, data).then((res) => {
-              wx.hideLoading();
+              if (loading) {
+                wx.hideLoading();
+              }
               resolve(res)
             });
           })
         } else {
-          wx.hideLoading();
+          if (loading) {
+            wx.hideLoading();
+          }
           if (!rData.success) {
             wx.showToast({ title: rData.message, icon: 'none', duration: 3000 })
           } else {
@@ -33,7 +42,9 @@ export function post(url: string, data: any = {}): Promise<any> {
         }
       },
       fail: function () {
-        wx.hideLoading();
+        if (loading) {
+          wx.hideLoading();
+        }
         wx.showToast({ title: '网络异常', icon: 'none', duration: 3000 });
       }
     });

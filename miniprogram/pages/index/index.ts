@@ -97,7 +97,7 @@ Page({
   },
 
   setName(e: Object) {
-    post('setUserName', { userName: e.detail.value });
+    post('setUserName', { userName: e.detail.value }, true);
     this.setData({
       userName: e.detail.value
     })
@@ -111,7 +111,7 @@ Page({
           url: '/pages/room/room?roomId=' + room.id
         })
       } else {
-        post("buildRoom").then((res: any) => {
+        post("buildRoom", {}, true).then((res: any) => {
           wx.navigateTo({
             url: '/pages/room/room?roomId=' + res.id
           })
